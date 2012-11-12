@@ -9,7 +9,7 @@ function GetValue(a)
 		u=u.substring(0,L);
 	do
 		s+=u.charAt(q++);
-	while (((u.charAt(q)!="&")||(u.charAt(q)!="#"))&&(q<L));
+	while ((u.charAt(q)!="&")&&(u.charAt(q)!="#")&&(q<L));
 	return decodeURIComponent(s);
 }
 
@@ -94,7 +94,56 @@ function checkhash()
 	if(thash=="GetMore#")
 	{
 		SendMore(sendpool);
-		return;
+	}
+	else if(thash=="OneLine#")
+	{
+		lastsending=false;
+		if(sendpool!="")
+		{
+			SendMore(sendpool);
+		}
+		else
+		{
+			sending=false;
+			if(SAO)
+			{
+				if(SAO==1)
+					Send2("GetMore",true);
+				else
+				{
+					Send2("OneLine",true);
+					clearInterval(interval);
+					setTimeout(function(){interval=setInterval(checkhash,20);},50);
+				}
+				SAO=false;
+			}
+		}
+	}
+	else if(thash.charAt(thash.length-1)=="#")
+	{
+		recvpool+=thash.substring(0,thash.length-1);
+		eval(recvpool);
+		recvpool="";
+		if(sending)
+		{
+			SAO=2;
+		}
+		else
+		{
+			Send2("OneLine",true);
+			clearInterval(interval);
+			setTimeout(function(){interval=setInterval(checkhash,20);},50);
+		}
+	}
+	else
+	{
+		recvpool+=thash.substring(0,thash.length);
+		if(sending)
+		{
+			SAO=1;
+		}
+		else
+			Send2("GetMore",true);
 	}
 }
 
@@ -105,28 +154,34 @@ function Send2(c,end)
 		t="#";
 	else
 		t="";
-	document.parentWindow.parent.document.location.href=h+"#"+c+t;
+	sending=true;
+	document.parentWindow.parent.document.location.href=h+"#"+flag+c+t;
+	flag++;
+	if(flag>9) flag=0;
 }
 
-function SendMore(c)
+function SendMore()
 {
-	if(c.length<=1500)
+	if(sendpool.length<=1500)
 	{
-		Send2(c,true);
+		Send2(sendpool,true);
+		sendpool="";
+		lastsending=true;
 	}
 	else
 	{
-		Send2(c.substring(0,1500),false);
-		sendpool=c.substring(1500);
+		Send2(sendpool.substring(0,1500),false);
+		sendpool=sendpool.substring(1500);
 	}
 }
 
 function Send(c)
 {
 	c=encodeURIComponent(c);
-	if(sendpool=="")
+	if((sendpool=="")&&(!lastsending))
 	{
-		SendMore(c);
+		sendpool=c;
+		SendMore();
 	}
 	else
 	{
@@ -135,13 +190,16 @@ function Send(c)
 }
 
 var h=GetValue("h");
-var sendpool,hash;
+var sendpool,hash,flag,recvpool,SAO,sending,lastsending,interval;
 function Start()
 {
-	sendpool="";
+	sendpool=recvpool="";
+	flag=0;
+	sending=lastsending=false;
+	SAO=0;
 	hash=location.hash;
 	Send("GetNick();");
-	setInterval(checkhash,20);	
+	interval=setInterval(checkhash,20);	
 }
 
 if(h)
