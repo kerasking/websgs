@@ -1,0 +1,5 @@
+body {margin:0;padding:0;}
+img,a img {border:0;}
+#div_login {width:960px;border:1px solid black;margin:0 auto;padding:0;background-color:#eaeaea;}
+#text_login_server {width:700px;}
+iframe {border:0;}
