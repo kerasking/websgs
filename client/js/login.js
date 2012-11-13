@@ -2,6 +2,7 @@ function init()
 {
 	document.getElementById("text_login_server").value=config_server;
 	document.getElementById("text_login_nick").value=config_nick;
+	window.onbeforeunload=function (event){return "你确定要离开游戏吗？";}
 }
 var ServerAddress,lastid,sendid,lunxun,duanxian,dxcount;
 
@@ -54,6 +55,7 @@ function destroy(id)
 	s.parentNode.removeChild(s);
 	dxcount=0;
 	clearTimeout(duanxian[id]);
+	clearTimeout(lunxun);
 	lunxun=setTimeout(flunxun,1500);
 }
 
