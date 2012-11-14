@@ -3,6 +3,9 @@ function init()
 	document.getElementById("text_login_server").value=config_server;
 	document.getElementById("text_login_nick").value=config_nick;
 	window.onbeforeunload=function (event){return "你确定要离开游戏吗？";}
+	var blc=document.getElementById("button_login_connect");
+	blc.disabled=false;
+	blc.value="连接";
 }
 var ServerAddress,lastid,sendid,lunxun,duanxian,dxcount;
 
@@ -18,6 +21,9 @@ function loginsub()
 	dxcount=0;
 	duanxian=new Array();
 	Send("login","n="+encodeURIComponent(document.getElementById("text_login_nick").value));
+	var blc=document.getElementById("button_login_connect");
+	blc.disabled=true;
+	blc.value="连接中……";
 }
 
 function Send(m,v)
@@ -27,7 +33,8 @@ function Send(m,v)
 	script.id="sc"+sendid;
 	if(v!=undefined) script.src+="&"+v;
 	document.getElementsByTagName("body")[0].appendChild(script);
-	duanxian[sendid]=setTimeout(function(){dxcheck(sendid)},10000);
+	var tsid=sendid;
+	duanxian[sendid]=setTimeout(function(){dxcheck(tsid)},15000);
 	clearTimeout(lunxun);
 	sendid++;
 	if(sendid>999) sendid=0;
@@ -40,6 +47,12 @@ function flunxun()
 
 function dxcheck(sid)
 {
+	var s=document.getElementById("sc"+sid);
+	if(s.src.indexOf("?m=login&")!=-1)
+	{
+		LoginFail(sid,"连接超时");
+		return;
+	}
 	dxcount++;
 	if(dxcount>3)
 	{
@@ -78,4 +91,7 @@ function LoginFail(sid,msg)
 	destroy(sid);
 	clearTimeout(lunxun);
 	alert(msg);
+	var blc=document.getElementById("button_login_connect");
+	blc.disabled=false;
+	blc.value="连接";
 }

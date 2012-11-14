@@ -1,8 +1,69 @@
-CREATE TABLE `websgs`.`oluser` (
-`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`nick` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL ,
-`room` INT UNSIGNED NOT NULL ,
-`lasttime` INT UNSIGNED NOT NULL ,
-`status` TINYINT UNSIGNED NOT NULL
-) ENGINE = MEMORY;
+-- phpMyAdmin SQL Dump
+-- version 3.3.9
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2012 年 11 月 14 日 08:59
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.5
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- 数据库: `websgs`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oluser`
+--
+
+CREATE TABLE IF NOT EXISTS `oluser` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nick` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `room` int(10) unsigned NOT NULL,
+  `lasttime` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `ip` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MEMORY DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `oluser`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `rooms`
+--
+
+CREATE TABLE IF NOT EXISTS `rooms` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fangzu` int(10) unsigned NOT NULL,
+  `xuanjiang` tinyint(3) unsigned NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `feng` tinyint(3) unsigned NOT NULL,
+  `huo` tinyint(3) unsigned NOT NULL,
+  `shan` tinyint(3) unsigned NOT NULL,
+  `lin` tinyint(3) unsigned NOT NULL,
+  `yijiang` tinyint(1) NOT NULL,
+  `yijiang2012` tinyint(1) NOT NULL,
+  `sp` tinyint(1) NOT NULL,
+  `spxing` tinyint(1) NOT NULL,
+  `tongque` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MEMORY DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `rooms`
+--
 
