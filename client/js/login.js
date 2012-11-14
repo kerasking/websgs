@@ -72,3 +72,10 @@ function LoginSuccess(rooms,dxcl)
 {
 	
 }
+
+function LoginFail(sid,msg)
+{
+	destroy(sid);
+	clearTimeout(lunxun);
+	alert(msg);
+}
