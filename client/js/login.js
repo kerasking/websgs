@@ -83,7 +83,10 @@ function run(lid,x)
 
 function LoginSuccess(rooms,dxcl)
 {
-	
+	roomlist=rooms;
+	var d=document.getElementById("div_login");
+	d.parentNode.removeChild(d);
+	DrawRooms();
 }
 
 function LoginFail(sid,msg)

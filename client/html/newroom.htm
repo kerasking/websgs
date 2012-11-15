@@ -1,0 +1,51 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style>
+.opacity {
+position:fixed;
+_position:absolute;
+background-color:#fff;
+filter:alpha(opacity="50");
+opacity:0.5;
+width:100%;
+height:100%;
+_height:expression(eval(document.documentElement.clientHeight));
+left:0;
+top:0;
+_top:expression(eval(document.documentElement.scrollTop));
+_left:expression(eval(document.documentElement.scrollLeft));
+z-index:998;
+}
+.tcck li {list-style:none;}
+.tcck ul {padding:0;margin:0;}
+.newroom {
+width:347px;
+height:411px;
+border:solid 1px #963;
+z-index:999;
+position:fixed;
+_position:absolute;
+top:50%;
+left:50%;
+margin-left:-173px;
+margin-top:-205px;
+left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth/2));
+top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight/2));
+}
+.tctitle {margin:0;font-size:18px;padding:0 0 2px 3px;border-bottom:1px solid #963;height:24px;}
+.tctitle span {float:right;margin:0;padding:3px 8px;cursor:pointer;color:white;font-weight:bold;font-family:"黑体";background-color:#963;}
+</style>
+
+<div id="div_tcck" class="tcck"><div class="opacity"></div>
+<div class="newroom">
+<div class="tctitle">新建房间<span onclick="CloseTCCK()">X</span></div>
+<ul>
+	<li>选将数：<input type="text" value="5" id="text_newroom_xuanjiang" /></li>
+	<li>密码：<input type="text" value="" id="text_newroom_password" /></li>
+	<li>风包：<input type="checkbox" checked="checked" id="checkbox_newroom_feng" />开启 <input type="checkbox" checked="checked" id="checkbox_newroom_fengshen" />神将</li>
+	<li>火包：<input type="checkbox" checked="checked" id="checkbox_newroom_huo" />开启 <input type="checkbox" checked="checked" id="checkbox_newroom_huoshen" />神将</li>
+	<li>山包：<input type="checkbox" checked="checked" id="checkbox_newroom_shan" />开启 <input type="checkbox" checked="checked" id="checkbox_newroom_shanshen" />神将</li>
+	<li>林包：<input type="checkbox" checked="checked" id="checkbox_newroom_lin" />开启 <input type="checkbox" id="checkbox_newroom_linshen" />神将</li>
+	<li><input type="checkbox" checked="checked" id="checkbox_newroom_yijiang" />一将 <input type="checkbox" checked="checked" id="checkbox_newroom_yijiang2012" />一将2012 <input type="checkbox" checked="checked" id="checkbox_newroom_sp" />sp <input type="checkbox" checked="checked" id="checkbox_newroom_spxing" />☆sp <input type="checkbox" checked="checked" id="checkbox_newroom_tongque" />铜雀 </li>
+	<li><input type="button" onclick="CreateRoom()" value="确定" /> <input type="button" onclick="CloseTCCK()" value="取消" /></li>
+</ul>
+</div>
+</div>
