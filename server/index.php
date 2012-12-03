@@ -8,9 +8,23 @@ if($_GET['m']=='login')
 {
 	require 'php/login.php';
 }
-else if($_GET['m']=='lunxun')
-{	
-
+else
+{
+	//连接检测
+	if(!isset($_SESSION['id']))
+		die('ChongLian('.$_GET['s'].');');
+	$s=$db->prepare('select nick,room,status from oluser where id=? limit 1');
+	$s->execute(array($_SESSION['id']));
+	$userinfo=$s->fetch();
+	if($userinfo===false) die('ChongLian('.$_GET['s'].');');
+	$s=$db->prepare('update oluser set lasttime=? where id=? limit 1');
+	$s->execute(array(time(),$_SESSION['id']));
+	//发送最新指令
+	require 'php/sendcode.php';
+	if($_GET['m']=='createroom')
+	{
+		require 'php/createroom.php';
+	}
 }
 echo 'destroy(',$_GET['s'],');';
 ?>

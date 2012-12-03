@@ -13,8 +13,7 @@ border-width:0 1px 1px 0;
 padding:2px;
 }
 .ManageRoom {text-align:right;}
-a:hover {color:red;}
-a:link,a:visited {color:blue;}
+.ManageRoom span {color:blue;text-decoration:underline;cursor:pointer;}
 
 .opacity {
 position:fixed;
@@ -31,7 +30,7 @@ _top:expression(eval(document.documentElement.scrollTop));
 _left:expression(eval(document.documentElement.scrollLeft));
 z-index:998;
 }
-.tcck li {list-style:none;}
+.tcck li {list-style:none;margin:5px;}
 .tcck ul {padding:0;margin:0;}
 .newroom {
 background-color:white;
@@ -45,8 +44,12 @@ top:50%;
 left:50%;
 margin-left:-173px;
 margin-top:-205px;
-left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth/2));
-top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight/2));
+_left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth/2));
+_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight/2));
 }
-.tctitle {margin:0;font-size:18px;padding:0 0 2px 3px;border-bottom:1px solid #963;height:24px;}
-.tctitle span {float:right;margin:0;padding:3px 8px;cursor:pointer;color:white;font-weight:bold;font-family:"黑体";background-color:#963;}
+.tctitle {background-color:#963;color:white;margin:0;font-size:18px;padding:0 0 2px 3px;border-bottom:1px solid #963;height:24px;overflow:hidden;}
+.tctitle span {float:right;margin:0;padding:3px 8px;cursor:pointer;font-weight:bold;font-family:"黑体";}
+.tctitle div {float:left;font-family:"黑体";margin-top:2px;}
+.CRoom {background-color:#3cf;}
+.rooms tbody tr {cursor:default;text-align:center;}
+.rooms tbody tr:hover {background-color:#3cf;}

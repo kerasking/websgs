@@ -1,0 +1,69 @@
+<?php
+if($_SESSION['frontid']<$_GET['l'])
+{
+	for($i=$_SESSION['frontid']+1;$i<=$_GET['l'];$i++)
+	{
+		unset($_SESSION['c'.$i]);
+	}
+	$_SESSION['frontid']=$_GET['l'];
+}
+if($_SESSION['frontid']<$_SESSION['lastid'])
+{
+	for($i=$_SESSION['frontid']+1;$i<=$_SESSION['lastid'];$i++)
+	{
+		echo $_SESSION['c'.$i];
+	}
+}
+if($userinfo['room']!=0)
+{
+	/*if(filesize('room/'.$_SESSION['roomid'].'/'.$_SESSION['fileid'])!=$_SESSION['rfsize'])
+	{
+		gt_aa:
+		$_SESSION['rfsize']=filesize('room/'.$_SESSION['roomid'].'/'.$_SESSION['fileid']);
+		$f=fopen('room/'.$_SESSION['roomid'].'/'.$_SESSION['fileid'],'r');
+		$i=0;
+		while($s=fgets($f))
+		{
+			$i++;
+			if($_SESSION['lineid']<$i)
+			{
+				msend($s);
+			}
+		}
+		$_SESSION['lineid']=$i;
+		fclose($f);
+		$nf=filectime('room/'.$_SESSION['roomid'].'/'.($_SESSION['fileid']+1));
+		$cf=filectime('room/'.$_SESSION['roomid'].'/'.$_SESSION['fileid']);
+		if(!$nf)
+		{
+			gt_bb:
+			if(time()-$cf>30)
+			{
+				$f=fopen('room/'.$_SESSION['roomid'].'/'.(++$_SESSION['fileid']),'w');
+				fclose($f);
+				$_SESSION['lineid']=0;
+				$_SESSION['rfsize']=0;
+			}
+		}
+		else if($nf>$cf)
+		{
+			$_SESSION['fileid']++;
+			$_SESSION['lineid']=0;
+			goto gt_aa;
+		}
+		else
+		{
+			unlink('room/'.$_SESSION['roomid'].'/'.($_SESSION['fileid']+1));
+			goto gt_bb;
+		}
+	}*/
+	$s=$db->prepare('select * from roomcode where id>? and room=? and (user=0 or user=?) order by id asc');
+	$s->execute(array($_SESSION['sqlid'],$userinfo['room'],$_SESSION['id']));
+	while($si=$s->fetch())
+	{
+		msend($si['code']);
+		$_SESSION['sqlid']=$si['id'];
+	}
+}
+
+?>
